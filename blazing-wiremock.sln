@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "blazing-wiremock.Server", "blazing-wiremock.Server\blazing-wiremock.Server.csproj", "{9FDB6343-7363-4F63-8841-63F123204AA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "blazing-wiremock.Client", "blazing-wiremock.Client\blazing-wiremock.Client.csproj", "{63F07C3B-3032-4DF4-8D01-D3C24CDCEE98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "blazing-wiremock.Shared", "blazing-wiremock.Shared\blazing-wiremock.Shared.csproj", "{5992AF05-DEC9-4141-ADEF-5B5869E6E385}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9FDB6343-7363-4F63-8841-63F123204AA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FDB6343-7363-4F63-8841-63F123204AA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FDB6343-7363-4F63-8841-63F123204AA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FDB6343-7363-4F63-8841-63F123204AA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63F07C3B-3032-4DF4-8D01-D3C24CDCEE98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63F07C3B-3032-4DF4-8D01-D3C24CDCEE98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63F07C3B-3032-4DF4-8D01-D3C24CDCEE98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63F07C3B-3032-4DF4-8D01-D3C24CDCEE98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5992AF05-DEC9-4141-ADEF-5B5869E6E385}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5992AF05-DEC9-4141-ADEF-5B5869E6E385}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5992AF05-DEC9-4141-ADEF-5B5869E6E385}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5992AF05-DEC9-4141-ADEF-5B5869E6E385}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {52524578-27F0-4F75-9FB3-68CA7A0894DC}
+	EndGlobalSection
+EndGlobal
