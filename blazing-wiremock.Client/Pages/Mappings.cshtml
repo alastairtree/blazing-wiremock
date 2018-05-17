@@ -1,0 +1,52 @@
+﻿@using System.Collections.Generic
+@using System.Threading.Tasks
+@using WireMock.Admin.Mappings
+@using blazingwiremock.Client;
+@page "/mappings"
+@inject WiremockAdminClient Http;
+
+<h1>Get list of mappings configurted on the Wiremock Server</h1>
+
+@if (mappings == null)
+{
+  <p>
+    <em>Loading...</em>
+  </p>
+}
+else
+{
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Method</th>
+      <th>Path</th>
+      <th>Response</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var mapping in mappings)
+    {
+      <tr>
+        <td>
+          @foreach (var method in mapping.Request.Methods)
+          {
+            <span class="label label-info">@method</span>
+          }
+        </td>
+        <td>@mapping.Request.Path</td>
+        <td>@mapping.Response.BodyAsJson</td>
+      </tr>
+    }
+    </tbody>
+  </table>
+}
+
+@functions {
+  IList<MappingModel> mappings;
+
+  protected override async Task OnInitAsync()
+  {
+    mappings = await Http.GetMappingsAsync();
+  }
+
+}

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using blazing_wiremock.Client;
 using Microsoft.AspNetCore.Blazor;
+using WireMock.Admin.Mappings;
 using WireMock.Logging;
 
 namespace blazingwiremock.Client
@@ -26,10 +27,10 @@ namespace blazingwiremock.Client
             return client.GetJsonAsync<IList<LogEntryModel>>("__admin/requests");
         }
 
-        //public Task<IList<MappingModel>> GetMappingsAsync()
-        //{
-        //    return client.GetJsonAsync<IList<MappingModel>>("/__admin/mappings");
-        //}
+        public Task<IList<MappingModel>> GetMappingsAsync()
+        {
+            return client.GetJsonAsync<IList<MappingModel>>("/__admin/mappings");
+        }
     }
 
     public class LogEntryModel
