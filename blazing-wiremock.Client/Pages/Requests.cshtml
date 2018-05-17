@@ -2,15 +2,22 @@
 @using System
 @using System.Collections
 @using System.Collections.Generic
+@using System.Net
 @using System.Threading
 @using System.Threading.Tasks
 @using blazingwiremock.Client
 @using blazing_wiremock.Shared
 @using blazing_wiremock.Client;
+@using Microsoft.AspNetCore.Blazor
 @inject WiremockAdminClient Http;
 @implements IDisposable
 
-<h1>Get list of requests recieved by the Wiremock Server</h1>
+<h1>
+  Get list of requests recieved by the Wiremock Server
+  <button class="btn btn-primary float-right" onclick="@PauseToggle">
+    @(paused ? "Unpause" : "Pause")
+  </button>
+</h1>
 
 @if (requests == null)
 {
@@ -31,7 +38,9 @@ else
       {
         <tr>
           <td>@request.Request.DateTime.ToLongTimeString()</td>
-          <td>@request.Request.Method</td>
+          <td>
+            <span class="badge badge-info">@request.Request.Method</span>
+          </td>
           <td>@request.Request.Path</td>
         </tr>
       }
@@ -42,21 +51,29 @@ else
 @functions {
     IList<LogEntryModel> requests;
     Timer timer;
-    protected override async Task OnInitAsync()
+    bool paused = false;
+
+    protected override void OnInit()
     {
 
       if (timer == null)
       {
         timer = new Timer(new TimerCallback(async _ =>
         {
-          
+
           requests = await Http.GetRequestsAsync();
           // Note that the following line is necessary because otherwise
           // Blazor would not recognize the state change and not refresh the UI
           this.StateHasChanged();
-          
-        }), null, 2000, 2000);
+
+        }), null, 0, 2000);
       };
+    }
+
+    void PauseToggle(UIMouseEventArgs e)
+    {
+      paused = !paused;
+      timer.Change(paused ? 0 : 0, paused? 0 : 2000);
     }
 
     public void Dispose()
