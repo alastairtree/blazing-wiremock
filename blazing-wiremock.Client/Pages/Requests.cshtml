@@ -1,0 +1,66 @@
+﻿@page "/requests"
+@using System
+@using System.Collections
+@using System.Collections.Generic
+@using System.Threading
+@using System.Threading.Tasks
+@using blazingwiremock.Client
+@using blazing_wiremock.Shared
+@using blazing_wiremock.Client;
+@inject WiremockAdminClient Http;
+@implements IDisposable
+
+<h1>Get list of requests recieved by the Wiremock Server</h1>
+
+@if (requests == null)
+{
+  <p><em>Loading...</em></p>
+}
+else
+{
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>Method</th>
+        <th>Path</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (LogEntryModel request in requests)
+      {
+        <tr>
+          <td>@request.Request.DateTime.ToLongTimeString()</td>
+          <td>@request.Request.Method</td>
+          <td>@request.Request.Path</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
+
+@functions {
+    IList<LogEntryModel> requests;
+    Timer timer;
+    protected override async Task OnInitAsync()
+    {
+
+      if (timer == null)
+      {
+        timer = new Timer(new TimerCallback(async _ =>
+        {
+          
+          requests = await Http.GetRequestsAsync();
+          // Note that the following line is necessary because otherwise
+          // Blazor would not recognize the state change and not refresh the UI
+          this.StateHasChanged();
+          
+        }), null, 2000, 2000);
+      };
+    }
+
+    public void Dispose()
+    {
+      timer?.Dispose();
+    }
+}
